@@ -8,7 +8,9 @@ import {
   BadgeDollarSign,
 } from "lucide-react";
 import KpiCard from "@/components/dashboard/KpiCard";
-import { useDashboard } from "@/features/dashboard/useDashboard";
+import EmissionsChart from "@/components/dashboard/EmissionsChart";
+import Card from "@/components/common/Card";
+import { useDashboard } from "@/hooks/dashboard/useDashboard";
 import { useCompanyStore } from "@/stores/useCompanyStore";
 import { fetchCompanies, fetchCountries } from "@/lib/api";
 
@@ -37,7 +39,7 @@ export default function Home() {
   return (
     <div className="p-8 space-y-6">
       <h1 className="text-2xl font-semibold text-text">탄소 배출 대시보드</h1>
-
+      {/* KPI 카드  */}
       <div className="grid grid-cols-4 gap-4">
         <KpiCard
           title="총 배출량"
@@ -67,6 +69,14 @@ export default function Home() {
           icon={BadgeDollarSign}
         />
       </div>
+
+      {/* 스택 바 차트 */}
+      <Card>
+        <h2 className="text-sm font-medium text-text-muted mb-4">
+          월별 배출량
+        </h2>
+        <EmissionsChart />
+      </Card>
     </div>
   );
 }
