@@ -1,5 +1,7 @@
 "use client";
 
+import { useSource } from "@/hooks/custom/useSource";
+import { SOURCES, SOURCE_COLORS } from "@/constants/source";
 import {
   BarChart,
   Bar,
@@ -10,44 +12,11 @@ import {
   ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
-import { useCompanyStore } from "@/stores/useCompanyStore";
-import { useUIStore } from "@/stores/useUIStore";
-
-const SOURCES = [
-  { key: "gasoline", label: "Gasoline", color: "#16A34A" },
-  { key: "diesel",   label: "Diesel",   color: "#4ADE80" },
-  { key: "lpg",      label: "LPG",      color: "#86EFAC" },
-];
-
-const SOURCE_COLORS = Object.fromEntries(SOURCES.map((s) => [s.key, s.color]));
 
 const REDUCTION_TARGET = 200;
 
 export default function EmissionsChart() {
-  const { companies, selectedCountry, selectedCompany } = useCompanyStore();
-
-  const filtered = companies.filter((c) => {
-    if (selectedCompany) return c.id === selectedCompany;
-    if (selectedCountry) return c.country === selectedCountry;
-    return true;
-  });
-
-  const monthMap: Record<string, Record<string, number>> = {};
-  for (const company of filtered) {
-    for (const e of company.emissions) {
-      if (!monthMap[e.yearMonth]) monthMap[e.yearMonth] = {};
-      monthMap[e.yearMonth][e.source] = (monthMap[e.yearMonth][e.source] ?? 0) + e.emissions;
-    }
-  }
-
-  const data = Object.entries(monthMap)
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([month, sources]) => ({ month, ...sources }));
-
-  const activeSources = SOURCES.filter((s) =>
-    filtered.some((c) => c.emissions.some((e) => e.source === s.key))
-  );
-
+  const { monthlyData, activeSources } = useSource();
   return (
     <div>
       {/* 범례 */}
@@ -72,7 +41,7 @@ export default function EmissionsChart() {
       {/* 차트 */}
       <ResponsiveContainer width="100%" height={240}>
         <BarChart
-          data={data}
+          data={monthlyData}
           margin={{ top: 4, right: 16, left: 0, bottom: 0 }}
         >
           <CartesianGrid
@@ -112,4 +81,3 @@ export default function EmissionsChart() {
     </div>
   );
 }
-

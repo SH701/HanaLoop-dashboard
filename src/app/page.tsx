@@ -14,6 +14,7 @@ import Card from "@/components/common/Card";
 import { useDashboard } from "@/hooks/dashboard/useDashboard";
 import { useCompanyStore } from "@/stores/useCompanyStore";
 import { fetchCompanies, fetchCountries } from "@/lib/api";
+import SourceChart from "@/components/dashboard/SourceChart";
 
 export default function Home() {
   const { setCompanies, setCountries } = useCompanyStore();
@@ -80,6 +81,13 @@ export default function Home() {
           월별 배출량
         </h2>
         <EmissionsChart />
+      </Card>
+      {/* 도넛 차트 */}
+      <Card>
+        <h2 className="text-sm font-medium text-text-muted mb-4">
+          소스별 배출량
+        </h2>
+        <SourceChart />
       </Card>
     </div>
   );
