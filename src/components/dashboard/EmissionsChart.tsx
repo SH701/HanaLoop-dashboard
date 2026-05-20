@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useCompanyStore } from "@/stores/useCompanyStore";
+import { useUIStore } from "@/stores/useUIStore";
 
 const SOURCES = [
   { key: "gasoline", label: "Gasoline", color: "#16A34A" },
@@ -52,8 +53,14 @@ export default function EmissionsChart() {
       {/* 범례 */}
       <div className="flex items-center gap-4 mb-3 justify-end">
         {activeSources.map((s) => (
-          <div key={s.key} className="flex items-center gap-1.5 text-xs text-text-muted">
-            <span className="w-3 h-3 rounded-sm inline-block" style={{ backgroundColor: s.color }} />
+          <div
+            key={s.key}
+            className="flex items-center gap-1.5 text-xs text-text-muted"
+          >
+            <span
+              className="w-3 h-3 rounded-sm inline-block"
+              style={{ backgroundColor: s.color }}
+            />
             {s.label}
           </div>
         ))}
@@ -62,22 +69,43 @@ export default function EmissionsChart() {
           감축 목표
         </div>
       </div>
-
+      {/* 차트 */}
       <ResponsiveContainer width="100%" height={240}>
-        <BarChart data={data} margin={{ top: 4, right: 16, left: 0, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
+        <BarChart
+          data={data}
+          margin={{ top: 4, right: 16, left: 0, bottom: 0 }}
+        >
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="#E5E7EB"
+            vertical={false}
+          />
           <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#6B7280" }} />
           <YAxis tick={{ fontSize: 12, fill: "#6B7280" }} unit=" t" />
           <Tooltip
-            contentStyle={{ fontSize: 12, borderRadius: 8, border: "1px solid #E5E7EB" }}
+            contentStyle={{
+              fontSize: 12,
+              borderRadius: 8,
+              border: "1px solid #E5E7EB",
+            }}
             formatter={(value, name) => {
-              const label = SOURCES.find((s) => s.key === name)?.label ?? String(name);
+              const label =
+                SOURCES.find((s) => s.key === name)?.label ?? String(name);
               return [`${value} tCO₂e`, label];
             }}
           />
-          <ReferenceLine y={REDUCTION_TARGET} stroke="#DC2626" strokeDasharray="4 4" />
+          <ReferenceLine
+            y={REDUCTION_TARGET}
+            stroke="#DC2626"
+            strokeDasharray="4 4"
+          />
           {activeSources.map((s) => (
-            <Bar key={s.key} dataKey={s.key} stackId="a" fill={SOURCE_COLORS[s.key]} />
+            <Bar
+              key={s.key}
+              dataKey={s.key}
+              stackId="a"
+              fill={SOURCE_COLORS[s.key]}
+            />
           ))}
         </BarChart>
       </ResponsiveContainer>

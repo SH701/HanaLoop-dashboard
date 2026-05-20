@@ -7,6 +7,7 @@ import {
   Building2,
   BadgeDollarSign,
 } from "lucide-react";
+import Filter from "@/components/FIlter";
 import KpiCard from "@/components/dashboard/KpiCard";
 import EmissionsChart from "@/components/dashboard/EmissionsChart";
 import Card from "@/components/common/Card";
@@ -38,7 +39,10 @@ export default function Home() {
 
   return (
     <div className="p-8 space-y-6">
-      <h1 className="text-2xl font-semibold text-text">탄소 배출 대시보드</h1>
+      <div className="flex justify-between">
+        <h1 className="text-2xl font-semibold text-text">탄소 배출 대시보드</h1>
+        <Filter />
+      </div>
       {/* KPI 카드  */}
       <div className="grid grid-cols-4 gap-4">
         <KpiCard
