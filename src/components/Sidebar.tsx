@@ -1,19 +1,11 @@
 "use client";
 
-import {
-  LayoutDashboard,
-  TrendingUp,
-  Building2,
-  FileText,
-  Calculator,
-  Bell,
-  Settings,
-  LucideIcon,
-} from "lucide-react";
-import { useUIStore, NavItem } from "@/stores/useUIStore";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { LayoutDashboard, Calculator, LucideIcon } from "lucide-react";
 
 type NavSectionItem = {
-  id: NavItem;
+  href: string;
   label: string;
   icon: LucideIcon;
 };
@@ -27,24 +19,17 @@ const NAV_SECTIONS: NavSection[] = [
   {
     label: "분석",
     items: [
-      { id: "dashboard", label: "대시보드", icon: LayoutDashboard },
-      { id: "emissions", label: "배출량 분석", icon: TrendingUp },
-      { id: "companies", label: "회사 관리", icon: Building2 },
-      { id: "reports", label: "보고서", icon: FileText },
-      { id: "carbon-tax", label: "탄소세 계산", icon: Calculator },
-    ],
-  },
-  {
-    label: "관리",
-    items: [
-      { id: "alerts", label: "알림", icon: Bell },
-      { id: "settings", label: "설정", icon: Settings },
+      { href: "/", label: "대시보드", icon: LayoutDashboard },
+      { href: "/carbon-tax", label: "탄소세 계산", icon: Calculator },
     ],
   },
 ];
 
+const isActive = (pathname: string, href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+
 export default function Sidebar() {
-  const { activeNav, setActiveNav } = useUIStore();
+  const pathname = usePathname();
 
   return (
     <aside className="w-60 shrink-0 h-screen bg-white border-r border-gray-100 flex flex-col">
@@ -65,12 +50,12 @@ export default function Sidebar() {
               {section.label}
             </p>
             <ul className="space-y-0.5">
-              {section.items.map(({ id, label, icon: Icon }) => {
-                const active = activeNav === id;
+              {section.items.map(({ href, label, icon: Icon }) => {
+                const active = isActive(pathname, href);
                 return (
-                  <li key={id}>
-                    <button
-                      onClick={() => setActiveNav(id)}
+                  <li key={href}>
+                    <Link
+                      href={href}
                       className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                         active
                           ? "bg-emerald-50 text-emerald-700 font-medium"
@@ -83,7 +68,7 @@ export default function Sidebar() {
                         className={active ? "text-emerald-600" : "text-gray-400"}
                       />
                       {label}
-                    </button>
+                    </Link>
                   </li>
                 );
               })}

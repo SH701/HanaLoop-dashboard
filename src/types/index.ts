@@ -23,3 +23,22 @@ export type Post = {
   dateTime: string;
   content: string;
 };
+
+export type SourceKey = "gasoline" | "diesel" | "lpg";
+
+export type CarbonTaxInput = {
+  emissionsBySource: Record<SourceKey, number>;
+  freeAllocationRate: number;
+  offsetCredits: number;
+  kauPrice: number;
+};
+
+export type CarbonTaxResult = {
+  totalEmissions: number;
+  freeAllocation: number;
+  taxableBeforeOffset: number;
+  taxable: number;
+  tax: number;
+  annualTax: number;
+  taxableRatio: number;
+};

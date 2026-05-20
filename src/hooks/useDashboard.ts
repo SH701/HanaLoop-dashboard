@@ -12,7 +12,7 @@ export function useDashboard(): DashboardStats {
   const filtered = useFilteredCompanies();
 
   const allEntries = filtered.flatMap((c) => c.emissions);
-  const months = [...new Set(allEntries.map((e) => e.yearMonth))].sort();
+  const months = Array.from(new Set(allEntries.map((e) => e.yearMonth))).sort();
   const latestMonth = months.at(-1) ?? null;
   const prevMonth = months.at(-2) ?? null;
 
