@@ -1,7 +1,7 @@
 "use client";
 
 import { useSource } from "@/hooks/useSource";
-import { SOURCES, SOURCE_COLORS } from "@/constants/source";
+import { SOURCES, SOURCE_COLORS, COLORS } from "@/constants";
 import {
   BarChart,
   Bar,
@@ -47,16 +47,16 @@ export default function EmissionsChart() {
         >
           <CartesianGrid
             strokeDasharray="3 3"
-            stroke="#E5E7EB"
+            stroke={COLORS.border}
             vertical={false}
           />
-          <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#6B7280" }} />
-          <YAxis tick={{ fontSize: 12, fill: "#6B7280" }} unit=" t" />
+          <XAxis dataKey="month" tick={{ fontSize: 12, fill: COLORS.textMuted }} />
+          <YAxis tick={{ fontSize: 12, fill: COLORS.textMuted }} unit=" t" />
           <Tooltip
             contentStyle={{
               fontSize: 12,
               borderRadius: 8,
-              border: "1px solid #E5E7EB",
+              border: `1px solid ${COLORS.border}`,
             }}
             formatter={(value, name) => {
               const label =
@@ -66,7 +66,7 @@ export default function EmissionsChart() {
           />
           <ReferenceLine
             y={REDUCTION_TARGET}
-            stroke="#DC2626"
+            stroke={COLORS.danger}
             strokeDasharray="4 4"
           />
           {activeSources.map((s) => (

@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Post } from "@/types";
 import { usePosts } from "@/hooks/usePosts";
 import { useCompanyStore } from "@/stores/useCompanyStore";
-import PostForm from "@/components/dashboard/PostForm";
+import PostForm from "./PostForm";
 import { Pencil, Plus } from "lucide-react";
-import Button from "@/components/common/Button";
+import { Button } from "@/components/common";
 
 export default function PostList() {
   const { posts } = usePosts();

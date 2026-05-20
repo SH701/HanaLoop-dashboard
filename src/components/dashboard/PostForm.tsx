@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Post } from "@/types";
 import { usePostMutation } from "@/hooks/usePostMutation";
 import { useCompanyStore } from "@/stores/useCompanyStore";
-import Button from "@/components/common/Button";
+import { Button, Input, Select, Textarea } from "@/components/common";
 
 type Props = {
   post?: Post;
@@ -54,52 +54,48 @@ export default function PostForm({ post, onClose }: Props) {
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <label className="block text-xs text-text-muted mb-1">회사</label>
-            <select
+            <Select
               value={resourceUid}
               onChange={(e) => setResourceUid(e.target.value)}
               disabled={!!selectedCompany}
-              className="w-full border border-border rounded-md px-3 py-2 text-sm bg-card text-text focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
             >
               {companies.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.name}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
 
           <div>
             <label className="block text-xs text-text-muted mb-1">기준 월</label>
-            <input
+            <Input
               type="month"
               value={dateTime}
               onChange={(e) => setDateTime(e.target.value)}
               required
-              className="w-full border border-border rounded-md px-3 py-2 text-sm bg-card text-text focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
 
           <div>
             <label className="block text-xs text-text-muted mb-1">제목</label>
-            <input
+            <Input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
               placeholder="보고서 제목"
-              className="w-full border border-border rounded-md px-3 py-2 text-sm bg-card text-text focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
 
           <div>
             <label className="block text-xs text-text-muted mb-1">내용</label>
-            <textarea
+            <Textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
               rows={4}
               placeholder="보고서 내용을 입력하세요"
-              className="w-full border border-border rounded-md px-3 py-2 text-sm bg-card text-text focus:outline-none focus:ring-2 focus:ring-primary resize-none"
             />
           </div>
 

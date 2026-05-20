@@ -2,6 +2,7 @@
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import { useSource } from "@/hooks/useSource";
+import { COLORS } from "@/constants";
 
 export default function SourceChart() {
   const { sourceData, total } = useSource();
@@ -34,7 +35,7 @@ export default function SourceChart() {
                 contentStyle={{
                   fontSize: 12,
                   borderRadius: 8,
-                  border: "1px solid #E5E7EB",
+                  border: `1px solid ${COLORS.border}`,
                 }}
               />
             </PieChart>

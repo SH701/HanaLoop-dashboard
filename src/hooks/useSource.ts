@@ -1,14 +1,8 @@
-import { useCompanyStore } from "@/stores/useCompanyStore";
+import { useFilteredCompanies } from "@/hooks/useFilteredCompanies";
 import { SOURCES } from "@/constants/source";
 
 export function useSource() {
-  const { companies, selectedCountry, selectedCompany } = useCompanyStore();
-
-  const filtered = companies.filter((c) => {
-    if (selectedCompany) return c.id === selectedCompany;
-    if (selectedCountry) return c.country === selectedCountry;
-    return true;
-  });
+  const filtered = useFilteredCompanies();
 
   // 월별 데이터 (EmissionsChart용)
   const monthMap: Record<string, Record<string, number>> = {};

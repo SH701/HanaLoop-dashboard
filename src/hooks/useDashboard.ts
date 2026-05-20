@@ -1,6 +1,5 @@
-import { useCompanyStore } from "@/stores/useCompanyStore";
-
-const CARBON_PRICE_KRW = 40700;
+import { useFilteredCompanies } from "@/hooks/useFilteredCompanies";
+import { K_ETS_RATE } from "@/constants";
 
 export type DashboardStats = {
   totalEmissions: number; // 총배출량 
@@ -10,13 +9,7 @@ export type DashboardStats = {
 };
 
 export function useDashboard(): DashboardStats {
-  const { companies, selectedCountry, selectedCompany } = useCompanyStore();
-
-  const filtered = companies.filter((c) => {
-    if (selectedCompany) return c.id === selectedCompany;
-    if (selectedCountry) return c.country === selectedCountry;
-    return true;
-  });
+  const filtered = useFilteredCompanies();
 
   const allEntries = filtered.flatMap((c) => c.emissions);
   const months = [...new Set(allEntries.map((e) => e.yearMonth))].sort();
@@ -44,7 +37,7 @@ export function useDashboard(): DashboardStats {
           return sum > topSum ? c : top;
         }).name;
 
-  const estimatedTax = totalEmissions * CARBON_PRICE_KRW;
+  const estimatedTax = totalEmissions * K_ETS_RATE;
 
   return { totalEmissions, momChange, topCompany, estimatedTax };
 }

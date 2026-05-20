@@ -1,4 +1,5 @@
 import { useCompanyStore } from "@/stores/useCompanyStore";
+import { Select } from "@/components/common";
 
 export default function Filter() {
   const {
@@ -13,15 +14,12 @@ export default function Filter() {
   const filteredCompanies = selectedCountry
     ? companies.filter((c) => c.country === selectedCountry)
     : companies;
-  const selectClass =
-    "h-9 rounded-md border border-border bg-card px-3 text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary";
 
   return (
     <div className="flex items-center gap-3">
-      <select
+      <Select
         value={selectedCountry ?? ""}
         onChange={(e) => setSelectedCountry(e.target.value || null)}
-        className={selectClass}
       >
         <option value="">전체 국가</option>
         {countries.map((c) => (
@@ -29,12 +27,11 @@ export default function Filter() {
             {c.name}
           </option>
         ))}
-      </select>
+      </Select>
 
-      <select
+      <Select
         value={selectedCompany ?? ""}
         onChange={(e) => setSelectedCompany(e.target.value || null)}
-        className={selectClass}
       >
         <option value="">전체 회사</option>
         {filteredCompanies.map((c) => (
@@ -42,7 +39,7 @@ export default function Filter() {
             {c.name}
           </option>
         ))}
-      </select>
+      </Select>
     </div>
   );
 }

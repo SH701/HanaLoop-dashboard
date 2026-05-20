@@ -7,18 +7,14 @@ import {
   Building2,
   BadgeDollarSign,
 } from "lucide-react";
-import Filter from "@/components/FIlter";
-import KpiCard from "@/components/dashboard/KpiCard";
-import EmissionsChart from "@/components/dashboard/EmissionsChart";
-import Card from "@/components/common/Card";
+import Filter from "@/components/Filter";
+import { KpiCard, EmissionsChart, SourceChart, PostList } from "@/components/dashboard";
+import { Card } from "@/components/common";
+import { KpiCardSkeleton, ChartSkeleton, PostListSkeleton } from "@/components/skeleton";
 import { useDashboard } from "@/hooks/useDashboard";
 import { useCompanyStore } from "@/stores/useCompanyStore";
 import { fetchCompanies, fetchCountries } from "@/lib/api";
-import SourceChart from "@/components/dashboard/SourceChart";
-import PostList from "@/components/dashboard/PostList";
-import KpiCardSkeleton from "@/components/skeleton/KpiCardSkeleton";
-import ChartSkeleton from "@/components/skeleton/ChartSkeleton";
-import PostListSkeleton from "@/components/skeleton/PostListSkeleton";
+import { K_ETS_RATE } from "@/constants";
 
 export default function Home() {
   const { setCompanies, setCountries, setLoading, setError, isLoading, error } = useCompanyStore();
@@ -94,7 +90,7 @@ export default function Home() {
             <KpiCard
               title="탄소세 예상액"
               value={estimatedTax > 0 ? `₩${estimatedTax.toLocaleString()}` : "-"}
-              sub="K-ETS ₩40,700/tCO₂e"
+              sub={`K-ETS ₩${K_ETS_RATE.toLocaleString()}/tCO₂e`}
               icon={BadgeDollarSign}
             />
           </>
