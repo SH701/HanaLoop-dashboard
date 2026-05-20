@@ -168,7 +168,6 @@ let _posts = [...posts];
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 const jitter = () => 200 + Math.random() * 600;
 const maybeFail = () => Math.random() < 0.15;
-
 export async function fetchCountries() {
   await delay(jitter());
   return _countries;

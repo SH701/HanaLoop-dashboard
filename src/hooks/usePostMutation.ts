@@ -5,13 +5,13 @@ import { Post } from "@/types";
 
 export function usePostMutation() {
   const [isSaving, setIsSaving] = useState(false);
-  const [saveError, setSaveError] = useState<string | null>(null);
 
-  const { addPost, updatePost, saveSnapshot, rollback, setError } = usePostStore();
+  const { addPost, updatePost, saveSnapshot, rollback, setError } =
+    usePostStore();
 
   async function save(data: Omit<Post, "id"> & { id?: string }) {
     setIsSaving(true);
-    setSaveError(null);
+
     saveSnapshot();
 
     const isUpdate = !!data.id;
@@ -32,7 +32,7 @@ export function usePostMutation() {
     } catch (e) {
       rollback();
       const msg = e instanceof Error ? e.message : "저장에 실패했습니다.";
-      setSaveError(msg);
+
       setError(msg);
       throw e;
     } finally {
@@ -40,5 +40,5 @@ export function usePostMutation() {
     }
   }
 
-  return { save, isSaving, saveError, setSaveError };
+  return { save, isSaving };
 }

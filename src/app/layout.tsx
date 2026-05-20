@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
+import { Toaster } from "sonner";
 
 
 export const metadata: Metadata = {
@@ -13,9 +14,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="flex h-screen bg-gray-50 text-gray-900 antialiased overflow-hidden">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
+        <Toaster position="bottom-center" richColors />
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </body>
     </html>
   );

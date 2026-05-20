@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Post } from "@/types";
 import { usePostMutation } from "@/hooks/usePostMutation";
 import { useCompanyStore } from "@/stores/useCompanyStore";
 import { Button, Input, Select, Textarea } from "@/components/common";
+import { toast } from "sonner";
 
 type Props = {
   post?: Post;
@@ -13,18 +14,14 @@ type Props = {
 
 export default function PostForm({ post, onClose }: Props) {
   const { companies, selectedCompany } = useCompanyStore();
-  const { save, isSaving, saveError, setSaveError } = usePostMutation();
+  const { save, isSaving } = usePostMutation();
 
   const [title, setTitle] = useState(post?.title ?? "");
   const [content, setContent] = useState(post?.content ?? "");
   const [resourceUid, setResourceUid] = useState(
-    post?.resourceUid ?? selectedCompany ?? companies[0]?.id ?? ""
+    post?.resourceUid ?? selectedCompany ?? companies[0]?.id ?? "",
   );
   const [dateTime, setDateTime] = useState(post?.dateTime ?? "");
-
-  useEffect(() => {
-    setSaveError(null);
-  }, [title, content]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -32,7 +29,7 @@ export default function PostForm({ post, onClose }: Props) {
       await save({ id: post?.id, title, content, resourceUid, dateTime });
       onClose();
     } catch {
-      // error already set in usePostMutation
+      toast.error("저장 실패", { description: "변경사항이 롤백되었습니다." });
     }
   }
 
@@ -68,7 +65,9 @@ export default function PostForm({ post, onClose }: Props) {
           </div>
 
           <div>
-            <label className="block text-xs text-text-muted mb-1">기준 월</label>
+            <label className="block text-xs text-text-muted mb-1">
+              기준 월
+            </label>
             <Input
               type="month"
               value={dateTime}
@@ -99,12 +98,13 @@ export default function PostForm({ post, onClose }: Props) {
             />
           </div>
 
-          {saveError && (
-            <p className="text-xs text-red-500">{saveError} — 변경사항이 롤백되었습니다.</p>
-          )}
-
           <div className="flex justify-end gap-2 pt-1">
-            <Button type="button" variant="outline" onClick={onClose} disabled={isSaving}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+              disabled={isSaving}
+            >
               취소
             </Button>
             <Button type="submit" disabled={isSaving}>
