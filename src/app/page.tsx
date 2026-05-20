@@ -7,7 +7,7 @@ import {
   Building2,
   BadgeDollarSign,
 } from "lucide-react";
-import Filter from "@/components/Filter";
+
 import { KpiCard, EmissionsChart, SourceChart, PostList } from "@/components/dashboard";
 import { Card } from "@/components/common";
 import { KpiCardSkeleton, ChartSkeleton, PostListSkeleton } from "@/components/skeleton";
@@ -15,6 +15,7 @@ import { useDashboard } from "@/hooks/useDashboard";
 import { useCompanyStore } from "@/stores/useCompanyStore";
 import { fetchCompanies, fetchCountries } from "@/lib/api";
 import { K_ETS_RATE } from "@/constants";
+import FilterBar from "@/components/FilterBar";
 
 export default function Home() {
   const { setCompanies, setCountries, setLoading, setError, isLoading, error } = useCompanyStore();
@@ -52,7 +53,7 @@ export default function Home() {
     <div className="p-8 space-y-6">
       <div className="flex justify-between">
         <h1 className="text-2xl font-semibold text-text">탄소 배출 대시보드</h1>
-        <Filter />
+        <FilterBar />
       </div>
 
       {/* KPI 카드 */}
@@ -89,7 +90,9 @@ export default function Home() {
             />
             <KpiCard
               title="탄소세 예상액"
-              value={estimatedTax > 0 ? `₩${estimatedTax.toLocaleString()}` : "-"}
+              value={
+                estimatedTax > 0 ? `₩${estimatedTax.toLocaleString()}` : "-"
+              }
               sub={`K-ETS ₩${K_ETS_RATE.toLocaleString()}/tCO₂e`}
               icon={BadgeDollarSign}
             />
@@ -109,7 +112,10 @@ export default function Home() {
       <div className="flex gap-4 items-stretch">
         {/* 도넛 차트 */}
         {isLoading ? (
-          <ChartSkeleton chartClassName="h-[250px]" wrapperClassName="flex-[4]" />
+          <ChartSkeleton
+            chartClassName="h-[250px]"
+            wrapperClassName="flex-[4]"
+          />
         ) : (
           <Card className="flex-[4]">
             <SourceChart />

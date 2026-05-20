@@ -1,7 +1,7 @@
 import { useCompanyStore } from "@/stores/useCompanyStore";
 import { Select } from "@/components/common";
 
-export default function Filter() {
+export default function FilterBar() {
   const {
     countries,
     companies,
