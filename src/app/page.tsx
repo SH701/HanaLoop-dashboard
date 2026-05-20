@@ -11,10 +11,11 @@ import Filter from "@/components/FIlter";
 import KpiCard from "@/components/dashboard/KpiCard";
 import EmissionsChart from "@/components/dashboard/EmissionsChart";
 import Card from "@/components/common/Card";
-import { useDashboard } from "@/hooks/dashboard/useDashboard";
+import { useDashboard } from "@/hooks/useDashboard";
 import { useCompanyStore } from "@/stores/useCompanyStore";
 import { fetchCompanies, fetchCountries } from "@/lib/api";
 import SourceChart from "@/components/dashboard/SourceChart";
+import PostList from "@/components/dashboard/PostList";
 
 export default function Home() {
   const { setCompanies, setCountries } = useCompanyStore();
@@ -77,18 +78,19 @@ export default function Home() {
 
       {/* 스택 바 차트 */}
       <Card>
-        <h2 className="text-sm font-medium text-text-muted mb-4">
-          월별 배출량
-        </h2>
         <EmissionsChart />
       </Card>
-      {/* 도넛 차트 */}
-      <Card>
-        <h2 className="text-sm font-medium text-text-muted mb-4">
-          소스별 배출량
-        </h2>
-        <SourceChart />
-      </Card>
+
+      <div className="flex gap-4 items-stretch">
+        {/* 도넛 차트 */}
+        <Card className="flex-[4]">
+          <SourceChart />
+        </Card>
+        {/* 보고서 목록 */}
+        <Card className="flex-[6]">
+          <PostList />
+        </Card>
+      </div>
     </div>
   );
 }

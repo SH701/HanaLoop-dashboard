@@ -105,10 +105,59 @@ const companies: Company[] = [
 const posts: Post[] = [
   {
     id: "p1",
-    title: "Sustainability Report",
+    title: "Sustainability Report Q1",
     resourceUid: "c1",
     dateTime: "2024-02",
-    content: "Quarterly CO2 update",
+    content:
+      "Q1 탄소 배출량이 전분기 대비 8% 감소했습니다. 휘발유 소비 절감 캠페인이 주효했으며, 디젤 부문은 물류 최적화로 추가 감축 여지가 있습니다.",
+  },
+  {
+    id: "p2",
+    title: "연간 탄소 감축 목표 설정",
+    resourceUid: "c1",
+    dateTime: "2024-05",
+    content:
+      "2024년 연간 배출량 목표를 전년 대비 15% 감축으로 설정하였습니다. LPG 차량 전환 및 재생에너지 구매 확대를 주요 수단으로 활용할 예정입니다.",
+  },
+  {
+    id: "p3",
+    title: "탄소세 비용 분석",
+    resourceUid: "c1",
+    dateTime: "2024-09",
+    content:
+      "3분기 배출량 기준 예상 탄소세는 약 8,100만 원입니다. 현행 추세 유지 시 연간 3.2억 원 수준으로, 감축 투자 대비 비용 편익 분석을 첨부합니다.",
+  },
+  {
+    id: "p4",
+    title: "유럽 탄소 규제 대응 현황",
+    resourceUid: "c2",
+    dateTime: "2024-03",
+    content:
+      "EU CBAM(탄소국경조정제도) 시행에 따른 Globex의 대응 현황을 정리했습니다. 디젤 중심 물류를 전동화로 전환 중이며, 2025년까지 LPG 비중을 30% 이하로 낮출 계획입니다.",
+  },
+  {
+    id: "p5",
+    title: "Scope 3 배출량 측정 시범 운영",
+    resourceUid: "c2",
+    dateTime: "2024-07",
+    content:
+      "공급망 전체의 Scope 3 배출량 측정을 시범 운영했습니다. 협력사 18곳 중 12곳이 데이터를 제출했으며, 전체 배출의 약 62%가 원자재 조달 단계에서 발생함을 확인했습니다.",
+  },
+  {
+    id: "p6",
+    title: "2024 상반기 배출량 점검",
+    resourceUid: "c3",
+    dateTime: "2024-06",
+    content:
+      "Kotlin Inc 상반기 총 배출량은 425톤으로 집계되었습니다. LPG 비중이 높아 상대적으로 낮은 탄소 집약도를 유지하고 있으나, 하반기 물류 증가에 대비한 추가 감축 방안을 검토 중입니다.",
+  },
+  {
+    id: "p7",
+    title: "탄소중립 로드맵 초안",
+    resourceUid: "c3",
+    dateTime: "2024-11",
+    content:
+      "2030 탄소중립 달성을 위한 로드맵 초안을 작성했습니다. 단계별 목표: 2025년 -20%, 2027년 -45%, 2030년 Net Zero. 전기차 전환 및 재생에너지 PPA 체결이 핵심 과제입니다.",
   },
 ];
 

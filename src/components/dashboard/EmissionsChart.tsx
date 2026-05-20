@@ -1,6 +1,6 @@
 "use client";
 
-import { useSource } from "@/hooks/custom/useSource";
+import { useSource } from "@/hooks/useSource";
 import { SOURCES, SOURCE_COLORS } from "@/constants/source";
 import {
   BarChart,
@@ -19,6 +19,7 @@ export default function EmissionsChart() {
   const { monthlyData, activeSources } = useSource();
   return (
     <div>
+      <h2 className="text-sm font-medium text-text-muted mb-4">월별 배출량</h2>
       {/* 범례 */}
       <div className="flex items-center gap-4 mb-3 justify-end">
         {activeSources.map((s) => (
