@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Sidebar from "@/components/common/Sidebar";
+import Sidebar from "@/components/Sidebar";
+
 
 export const metadata: Metadata = {
   title: "Carbon Emissions Dashboard",
