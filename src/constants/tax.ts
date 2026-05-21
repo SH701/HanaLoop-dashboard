@@ -14,3 +14,5 @@ export const FREE_ALLOCATION_DEFAULT = 78;
 export const OFFSET_CAP_RATIO = 0.05;
 
 export const AUTO_OFFSET_RATIO = 0.04;
+
+export const REDUCTION_TARGET = 200;

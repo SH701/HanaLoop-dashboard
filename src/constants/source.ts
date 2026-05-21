@@ -12,8 +12,6 @@ export const SOURCES: SourceMeta[] = [
   { key: "lpg", label: "LPG", color: "#86EFAC" },
 ];
 
-export const SOURCE_COLORS: Record<SourceKey, string> = {
-  gasoline: "#16A34A",
-  diesel: "#4ADE80",
-  lpg: "#86EFAC",
-};
+export const SOURCE_COLORS = Object.fromEntries(
+  SOURCES.map((s) => [s.key, s.color])
+) as Record<SourceKey, string>;

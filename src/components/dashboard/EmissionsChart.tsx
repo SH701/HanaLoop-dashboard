@@ -1,7 +1,7 @@
 "use client";
 
 import { useSource } from "@/hooks/useSource";
-import { SOURCES, SOURCE_COLORS, COLORS } from "@/constants";
+import { SOURCES, SOURCE_COLORS, COLORS, REDUCTION_TARGET } from "@/constants";
 import {
   BarChart,
   Bar,
@@ -13,7 +13,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const REDUCTION_TARGET = 200;
 
 export default function EmissionsChart() {
   const { monthlyData, activeSources } = useSource();

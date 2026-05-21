@@ -1,12 +1,26 @@
 import { useFilteredCompanies } from "@/hooks/useFilteredCompanies";
 import { K_ETS_RATE } from "@/constants";
+import { Company } from "@/types";
+
+export type MomTrend = "up" | "down" | "neutral";
 
 export type DashboardStats = {
-  totalEmissions: number; // 총배출량 
-  momChange: number | null; // 전월대비 변화율 
-  topCompany: string | null; // 최다배출회사 이름
-  estimatedTax: number; // 탄소세예상액 
+  totalEmissions: number;
+  momChange: number | null;
+  momLabel: string;
+  momTrend: MomTrend;
+  topCompany: string | null;
+  estimatedTax: number;
 };
+
+const sumEmissions = (c: Company) =>
+  c.emissions.reduce((acc, e) => acc + e.emissions, 0);
+
+const pickTopCompany = (companies: Company[]) =>
+  companies.length === 0
+    ? null
+    : companies.reduce((top, c) => (sumEmissions(c) > sumEmissions(top) ? c : top))
+        .name;
 
 export function useDashboard(): DashboardStats {
   const filtered = useFilteredCompanies();
@@ -28,16 +42,20 @@ export function useDashboard(): DashboardStats {
       ? ((totalEmissions - prevTotal) / prevTotal) * 100
       : null;
 
-  const topCompany =
-    filtered.length === 0
-      ? null
-      : filtered.reduce((top, c) => {
-          const sum = c.emissions.reduce((a, e) => a + e.emissions, 0);
-          const topSum = top.emissions.reduce((a, e) => a + e.emissions, 0);
-          return sum > topSum ? c : top;
-        }).name;
+  const momLabel =
+    momChange == null
+      ? "-"
+      : `${momChange > 0 ? "+" : ""}${momChange.toFixed(1)}% 전월 대비`;
 
-  const estimatedTax = totalEmissions * K_ETS_RATE;
+  const momTrend: MomTrend =
+    momChange == null ? "neutral" : momChange > 0 ? "up" : "down";
 
-  return { totalEmissions, momChange, topCompany, estimatedTax };
+  return {
+    totalEmissions,
+    momChange,
+    momLabel,
+    momTrend,
+    topCompany: pickTopCompany(filtered),
+    estimatedTax: totalEmissions * K_ETS_RATE,
+  };
 }

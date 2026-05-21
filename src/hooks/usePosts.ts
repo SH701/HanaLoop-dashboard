@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { fetchPosts } from "@/lib/api";
 import { useCompanyStore } from "@/stores/useCompanyStore";
 import { usePostStore } from "@/stores/usePostStore";
@@ -15,12 +15,7 @@ export function usePosts() {
       setError(null);
       try {
         const data = await fetchPosts();
-        if (!cancelled) {
-          const filtered = selectedCompany
-            ? data.filter((p) => p.resourceUid === selectedCompany)
-            : data;
-          setPosts(filtered);
-        }
+        if (!cancelled) setPosts(data);
       } catch (e) {
         if (!cancelled) setError(e instanceof Error ? e.message : "Failed to load posts");
       } finally {
@@ -29,7 +24,12 @@ export function usePosts() {
     }
     load();
     return () => { cancelled = true; };
-  }, [selectedCompany, setPosts, setLoading, setError]);
+  }, [setPosts, setLoading, setError]);
 
-  return { posts, isLoading, error };
+  const visiblePosts = useMemo(
+    () => selectedCompany ? posts.filter((p) => p.resourceUid === selectedCompany) : posts,
+    [posts, selectedCompany]
+  );
+
+  return { posts: visiblePosts, isLoading, error };
 }

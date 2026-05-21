@@ -19,7 +19,7 @@ import FilterBar from "@/components/FilterBar";
 
 export default function Home() {
   const { setCompanies, setCountries, setLoading, setError, isLoading, error } = useCompanyStore();
-  const { totalEmissions, momChange, topCompany, estimatedTax } =
+  const { totalEmissions, momChange, momLabel, momTrend, topCompany, estimatedTax } =
     useDashboard();
 
   useEffect(() => {
@@ -32,14 +32,6 @@ export default function Home() {
       .catch(() => setError("데이터를 불러오지 못했습니다."))
       .finally(() => setLoading(false));
   }, [setCompanies, setCountries, setLoading, setError]);
-
-  const momLabel =
-    momChange == null
-      ? "-"
-      : `${momChange > 0 ? "+" : ""}${momChange.toFixed(1)}% 전월 대비`;
-
-  const momTrend =
-    momChange == null ? "neutral" : momChange > 0 ? "up" : "down";
 
   if (error) {
     return (
