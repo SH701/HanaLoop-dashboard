@@ -16,10 +16,11 @@ export default function FilterBar() {
     : companies;
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="grid grid-cols-2 gap-2 md:flex md:items-center md:gap-3">
       <Select
         value={selectedCountry ?? ""}
         onChange={(e) => setSelectedCountry(e.target.value || null)}
+        className="w-full"
       >
         <option value="">전체 국가</option>
         {countries.map((c) => (
@@ -32,6 +33,7 @@ export default function FilterBar() {
       <Select
         value={selectedCompany ?? ""}
         onChange={(e) => setSelectedCompany(e.target.value || null)}
+        className="w-full"
       >
         <option value="">전체 회사</option>
         {filteredCompanies.map((c) => (

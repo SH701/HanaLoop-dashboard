@@ -39,6 +39,14 @@
   /* Shadow */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* Breakpoints
+   * mobile:  < 768px        (default, no prefix)
+   * tablet:  768px ~ 1023px (md:)
+   * desktop: >= 1024px      (lg:)
+   */
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
 }
 
 body {

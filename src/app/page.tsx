@@ -50,14 +50,14 @@ export default function Home() {
   }
 
   return (
-    <div className="p-8 space-y-6">
-      <div className="flex justify-between">
-        <h1 className="text-2xl font-semibold text-text">탄소 배출 대시보드</h1>
+    <div className="p-4 md:p-6 lg:p-8 space-y-6">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <h1 className="text-xl md:text-2xl font-semibold text-text">탄소 배출 대시보드</h1>
         <FilterBar />
       </div>
 
       {/* KPI 카드 */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {isLoading ? (
           <>
             <KpiCardSkeleton />
@@ -109,25 +109,25 @@ export default function Home() {
         </Card>
       )}
 
-      <div className="flex gap-4 items-stretch">
+      <div className="flex flex-col lg:flex-row gap-4 lg:items-stretch">
         {/* 도넛 차트 */}
         {isLoading ? (
           <ChartSkeleton
             chartClassName="h-[250px]"
-            wrapperClassName="flex-[4]"
+            wrapperClassName="lg:flex-[4]"
           />
         ) : (
-          <Card className="flex-[4]">
+          <Card className="lg:flex-[4]">
             <SourceChart />
           </Card>
         )}
         {/* 보고서 목록 */}
         {isLoading ? (
-          <Card className="flex-[6]">
+          <Card className="lg:flex-[6]">
             <PostListSkeleton />
           </Card>
         ) : (
-          <Card className="flex-[6]">
+          <Card className="lg:flex-[6]">
             <PostList />
           </Card>
         )}

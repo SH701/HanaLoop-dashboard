@@ -28,7 +28,7 @@ export default function MethodologyCard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
         {METHODOLOGY_REFERENCES.map((r) => (
           <div key={r.label} className="px-3 py-2 rounded-md border border-gray-100">
             <div className="flex items-center gap-1.5">

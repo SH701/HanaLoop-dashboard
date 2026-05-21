@@ -21,7 +21,7 @@ export default function EmissionsChart() {
     <div>
       <h2 className="text-sm font-medium text-text-muted mb-4">월별 배출량</h2>
       {/* 범례 */}
-      <div className="flex items-center gap-4 mb-3 justify-end">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-3 justify-start md:justify-end">
         {activeSources.map((s) => (
           <div
             key={s.key}

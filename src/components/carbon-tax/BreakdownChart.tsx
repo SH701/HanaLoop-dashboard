@@ -87,14 +87,14 @@ export default function BreakdownChart({ result, kauPrice }: BreakdownChartProps
 
   return (
     <Card>
-      <div className="flex items-start justify-between mb-3">
+      <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between mb-3">
         <div>
           <h3 className="text-sm font-semibold text-gray-900">계산 단계별 분해</h3>
           <p className="text-xs text-gray-500 mt-0.5">
             총 배출 → 할당/상쇄 차감 → 과세대상 → 탄소세
           </p>
         </div>
-        <div className="flex items-center gap-3 text-[11px] text-gray-500">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-gray-500">
           {LEGEND.map((l) => (
             <span key={l.label} className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-sm" style={{ background: l.color }} />

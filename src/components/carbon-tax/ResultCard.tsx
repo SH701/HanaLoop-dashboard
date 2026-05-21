@@ -10,24 +10,24 @@ export default function ResultCard({ result, kauPrice }: ResultCardProps) {
   const { taxable, tax, annualTax, taxableRatio } = result;
 
   return (
-    <div className="rounded-xl bg-emerald-700 text-white p-6 shadow-md">
-      <div className="flex items-start justify-between">
+    <div className="rounded-xl bg-emerald-700 text-white p-4 md:p-6 shadow-md">
+      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
           <p className="text-xs text-emerald-100/80">예상 탄소세 (월간)</p>
-          <p className="mt-2 text-4xl font-mono font-bold tracking-tight">
+          <p className="mt-2 text-3xl md:text-4xl font-mono font-bold tracking-tight break-all">
             {formatCurrency(tax)}
           </p>
         </div>
-        <div className="text-right">
+        <div className="md:text-right">
           <p className="text-xs text-emerald-100/80">과세 대상량</p>
-          <p className="mt-2 text-2xl font-mono font-semibold">
+          <p className="mt-2 text-xl md:text-2xl font-mono font-semibold">
             {formatNumber(taxable)}{" "}
             <span className="text-sm text-emerald-100">tCO₂e</span>
           </p>
         </div>
       </div>
 
-      <div className="mt-4 px-3 py-2 rounded-md bg-emerald-800/40 text-xs font-mono text-emerald-50/90">
+      <div className="mt-4 px-3 py-2 rounded-md bg-emerald-800/40 text-[11px] md:text-xs font-mono text-emerald-50/90 break-all">
         탄소세 = {formatNumber(taxable)} tCO₂e × {formatCurrency(kauPrice)}/톤 = {formatCurrency(tax)}
       </div>
 

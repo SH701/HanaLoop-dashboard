@@ -12,8 +12,8 @@ export default function SourceChart() {
       <h2 className="text-sm font-medium text-text-muted mb-4">
         소스별 배출량
       </h2>
-      <div className="flex gap-6 items-center justify-center">
-        <div className="relative" style={{ width: 180, height: 180 }}>
+      <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
+        <div className="relative shrink-0" style={{ width: 180, height: 180 }}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie

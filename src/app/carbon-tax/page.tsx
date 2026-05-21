@@ -69,15 +69,15 @@ export default function CarbonTaxPage() {
   const result = useCarbonTax(input);
 
   return (
-    <div className="p-8 space-y-6">
+    <div className="p-4 md:p-6 lg:p-8 space-y-6">
       <header>
-        <h1 className="text-2xl font-semibold text-gray-900">탄소세 시뮬레이터</h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <h1 className="text-xl md:text-2xl font-semibold text-gray-900">탄소세 시뮬레이터</h1>
+        <p className="text-xs md:text-sm text-gray-500 mt-1">
           K-ETS(배출권거래제) 기반 월간 탄소세 추정. 입력값을 조정하면 실시간 반영됩니다.
         </p>
       </header>
 
-      <div className="grid grid-cols-12 gap-6 items-stretch">
+      <div className="grid grid-cols-12 gap-4 md:gap-6 items-stretch">
         <aside className="col-span-12 lg:col-span-4 flex">
           <InputPanel
             companies={companies}
@@ -89,7 +89,7 @@ export default function CarbonTaxPage() {
           />
         </aside>
 
-        <section className="col-span-12 lg:col-span-8 flex flex-col gap-6">
+        <section className="col-span-12 lg:col-span-8 flex flex-col gap-4 md:gap-6">
           <ResultCard result={result} kauPrice={input.kauPrice} />
           <BreakdownChart result={result} kauPrice={input.kauPrice} />
           <MethodologyCard />
